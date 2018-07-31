@@ -41,7 +41,8 @@ class Medias
     }
 
     /**
-     * @param int|\WP_Post $postId
+     * @param int|\WP_Post $postId the post to get the image from
+     * @param bool $short if true -> relative url, if false -> absolute url with site url
      *
      * @return string
      */
