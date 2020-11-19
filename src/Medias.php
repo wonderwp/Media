@@ -41,6 +41,22 @@ class Medias
     }
 
     /**
+     * wp_get_attachment_image wrapper with an image url instead of an id
+     *
+     * @param string $mediaUrl
+     * @param string||array $size
+     * @param bool $icon
+     *
+     * @return string
+     */
+    public static function mediaSrcAtSize($mediaUrl, $size, $icon = false)
+    {
+        $imgId = self::getIdFromUrl($mediaUrl);
+
+        return wp_get_attachment_image_src($imgId, $size, $icon);
+    }
+
+    /**
      * @param int|\WP_Post $postId the post to get the image from
      * @param bool $short if true -> relative url, if false -> absolute url with site url
      *
