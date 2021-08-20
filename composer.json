@@ -1,33 +1,33 @@
 {
-    "name": "wonderwp/media",
-    "type": "library",
-    "description": "WonderWp Media Component",
-    "keywords": ["images"],
-    "homepage": "https://wonderwp.com",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Jeremy Desvaux",
-            "homepage": "http://jdmweb.com"
-        },
-        {
-            "name": "WonderWp Community",
-            "homepage": "https://wonderwp.com/contributors"
-        }
-    ],
-    "require": {
-        "php": "~5.6|~7",
-        "wonderwp/dependency-injection": "^1.0",
-        "wonderwp/http-foundation": "^1.0"
+  "name": "wonderwp/media",
+  "description": "WonderWp Media Component",
+  "type": "library",
+  "keywords": ["images", "media", "WonderWp", "WordPress"],
+  "homepage": "https://github.com/wonderwp/media",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jeremy Desvaux",
+      "homepage": "https://jdmweb.com"
     },
-    "require-dev": {
-        "johnpbloch/wordpress": "^4.7"
-    },
-    "autoload": {
-        "psr-4": {"WonderWp\\Component\\Media\\": "src"},
-        "exclude-from-classmap": [
-            "/tests/"
-        ]
-    },
-    "minimum-stability": "dev"
+    {
+      "name": "WonderWp Community",
+      "homepage": "http://wonderwp.net/Contribution/Contributors.html"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "wonderwp/dependency-injection": "^1.0",
+    "wonderwp/http-foundation": "^1.0"
+  },
+  "require-dev": {
+    "johnpbloch/wordpress": "^4.7"
+  },
+  "autoload": {
+    "psr-4": {"WonderWp\\Component\\Media\\": "src"},
+    "exclude-from-classmap": [
+      "/tests/"
+    ]
+  },
+  "minimum-stability": "dev"
 }
