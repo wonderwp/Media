@@ -18,7 +18,20 @@ class Medias
         global $wpdb;
         //Url to ID
         $attachmentCol = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $mediaUrl));
-        $imgId = !empty($attachmentCol[0]) ? $attachmentCol[0] : 0;
+        $imgId         = !empty($attachmentCol[0]) ? $attachmentCol[0] : 0;
+
+        if (!empty($imgId)) {
+            return $imgId;
+        }
+
+        //Some medias are scaled down by WordPress, and their url is not the one that is stored in post.guid field
+        //We can find the information in the postmeta._wp_attached_file meta instead
+        //So if we didn"t find a valid $imgId with post.guid, let's try with postmeta._wp_attached_file
+        $urlFrags        = explode('/', $mediaUrl);
+        $scaledPart      = end($urlFrags);
+        $statement       = $wpdb->prepare("SELECT post_id FROM $wpdb->postmeta WHERE meta_key='%s' and meta_value LIKE '%s';", '_wp_attached_file', '%' . $scaledPart);
+        $attachedfileCol = $wpdb->get_col($statement);
+        $imgId           = !empty($attachedfileCol[0]) ? $attachedfileCol[0] : 0;
 
         return $imgId;
     }
@@ -47,7 +60,7 @@ class Medias
      * @param string||array $size
      * @param bool $icon
      *
-     * @return string
+     * @return array | false
      */
     public static function mediaSrcAtSize($mediaUrl, $size, $icon = false)
     {
@@ -124,7 +137,7 @@ class Medias
             $file['name'] = $fileName;
         }
 
-        $container = Container::getInstance();
+        $container                        = Container::getInstance();
         $container['upload_dir_override'] = $dest;
         add_filter('upload_dir', [self::class, 'wpse183245UploadDir']);
         $movefile = wp_handle_upload($file, $upload_overrides);
@@ -154,8 +167,8 @@ class Medias
         $container = Container::getInstance();
         if ($container->offsetExists('upload_dir_override')) {
             $dirs['subdir'] = $container['upload_dir_override'];
-            $dirs['path'] = $dirs['basedir'] . $container['upload_dir_override'];
-            $dirs['url'] = $dirs['baseurl'] . $container['upload_dir_override'];
+            $dirs['path']   = $dirs['basedir'] . $container['upload_dir_override'];
+            $dirs['url']    = $dirs['baseurl'] . $container['upload_dir_override'];
         }
 
         return $dirs;
