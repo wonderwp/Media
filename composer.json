@@ -17,11 +17,11 @@
   ],
   "require": {
     "php": ">=8.0",
-    "wonderwp/dependency-injection": "^1.0",
-    "wonderwp/http-foundation": "^1.0"
+    "wonderwp/dependency-injection": "dev-feature/php_8",
+    "wonderwp/http-foundation": "dev-feature/increase_http_foundation_lib_version"
   },
   "require-dev": {
-    "johnpbloch/wordpress": "^4.7"
+    "johnpbloch/wordpress": "^6.0"
   },
   "autoload": {
     "psr-4": {"WonderWp\\Component\\Media\\": "src"},
