@@ -20,7 +20,12 @@ if ($autoload === null) {
     exit(1);
 }
 
+require_once __DIR__ . '/stub-wordpress.php';
 require_once $autoload;
+
+$GLOBALS['wpdb'] = new \wpdb();
+$GLOBALS['wwp_test_filters'] = [];
+$GLOBALS['wwp_test_removed_filters'] = [];
 
 spl_autoload_register(static function (string $class): void {
     $prefix = 'WonderWp\\Component\\Media\\Tests\\';
