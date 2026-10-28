@@ -123,7 +123,7 @@ class Medias
      *
      * @return Result
      */
-    public static function uploadTo(array $file = null, $dest = '', $fileName = null)
+    public static function uploadTo(?array $file = null, $dest = '', $fileName = null)
     {
         if (empty($file)) {
             return new Result(403, ['msg' => 'file.is.empty']);
